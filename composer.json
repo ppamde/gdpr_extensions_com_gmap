@@ -1,0 +1,45 @@
+{
+  "name": "gdpr-extensions-com/gdpr-extensions-com-gmap",
+  "type": "typo3-cms-extension",
+  "description": "Add Google Maps with single or multi location markers to your website and stay GDPR compliant! Your website viewers will be able to manage their cookie preferences and view the content only if consented. Stay GDPR compliant when your website is scanned by any Cookie or GDPR Scanner!",
+  "authors": [],
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "typo3/cms-core": "^12.4 || ^13.2"
+  },
+  "require-dev": {
+    "typo3/testing-framework": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "GdprExtensionsCom\\GdprExtensionsComGmap\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GdprExtensionsCom\\GdprExtensionsComGmap\\Tests\\": "Tests"
+    }
+  },
+  "replace": {
+    "typo3-ter/gdpr-extensions-com-googlemaps": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin",
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+    ]
+  },
+  "extra": {
+    "typo3/cms": {
+      "web-dir": ".Build/Web",
+      "extension-key": "gdpr_extensions_com_gmap"
+    }
+  }
+}
