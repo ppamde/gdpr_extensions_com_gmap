@@ -16,16 +16,6 @@ class GdprCookieWidgetController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected $contentObject = null;
 
     /**
-     * Action initialize
-     */
-    protected function initializeAction()
-    {
-        $this->contentObject = $this->configurationManager->getContentObject();
-
-        // intialize the content object
-    }
-
-    /**
      * action index
      *
      * @return \Psr\Http\Message\ResponseInterface
@@ -49,13 +39,22 @@ class GdprCookieWidgetController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             ->from('tx_gdprextensionscomyoutube_domain_model_gdprmanager')->where(
                 $queryBuilder->expr()->like('extension_title', $queryBuilder->createNamedParameter('%' . (string)'googlemaps' . '%'))
             );
-        $settings =  $gdprSettingGooglemaps->execute()->fetchAssociative();
+        $settings = $gdprSettingGooglemaps->fetchAssociative();
 
         $this->view->assign('cookieWidgetData', $result);
         $this->view->assign('GooglemapsData', $this->contentObject->data);
         $this->view->assign('GooglemapsSettings', $settings);
         return $this->htmlResponse();
 
+    }
+
+    /**
+     * Action initialize
+     */
+    protected function initializeAction(): void
+    {
+        $this->contentObject = $this->request->getAttribute('currentContentObject');
+        // intialize the content object
     }
 
 

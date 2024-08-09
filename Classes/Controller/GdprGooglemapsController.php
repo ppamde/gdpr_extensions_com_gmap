@@ -40,16 +40,6 @@ class GdprGooglemapsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     protected $contentObject = null;
 
     /**
-     * Action initialize
-     */
-    protected function initializeAction()
-    {
-        $this->contentObject = $this->configurationManager->getContentObject();
-
-        // intialize the content object
-    }
-
-    /**
      * @param \GdprExtensionsCom\GdprExtensionsComGmap\Domain\Repository\GdprManagerRepository $gdprManagerRepository
      */
     public function injectGdprManagerRepository(\GdprExtensionsCom\GdprExtensionsComGmap\Domain\Repository\GdprManagerRepository $gdprManagerRepository)
@@ -70,20 +60,20 @@ class GdprGooglemapsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             ->from('tx_gdprextensionscomyoutube_domain_model_gdprmanager')->where(
                 $queryBuilder->expr()->like('extension_title', $queryBuilder->createNamedParameter('%' . (string)'googlemaps' . '%'))
             );
-        $settings =  $gdprSettingGooglemaps->execute()->fetchAssociative();
+        $settings = $gdprSettingGooglemaps->fetchAssociative();
 
         $gdprManagers = $this->gdprManagerRepository->findAll();
         $mapLocations = [];
-        foreach ($gdprManagers as $gdprManager){
-            if($gdprManager->getExtensionKey() == "gdpr_extensions_com_gmap"){
-                foreach ($gdprManager->getLocations() as $key => $location ){
+        foreach ($gdprManagers as $gdprManager) {
+            if ($gdprManager->getExtensionKey() == "gdpr_extensions_com_gmap") {
+                foreach ($gdprManager->getLocations() as $key => $location) {
 //                    dd($location);
                     $tempArray = [
                         'title' => $location->getTitle(),
                         'address' => $location->getAddress(),
                         'lat' => $location->getLat(),
                         'long' => $location->getLon(),
-                        ];
+                    ];
 //                    array_push($tempArray,$location->getTitle(),$location->getAddress(),$location->getLat(),$location->getLon());
                     $mapLocations[] = $tempArray;
                 }
@@ -94,8 +84,17 @@ class GdprGooglemapsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
         $this->view->assign('LatLongData', json_encode($mapLocations));
         $this->view->assign('GooglemapsData', $this->contentObject->data);
-        $this->view->assign('rootPid', $GLOBALS['TSFE']->site->getRootPageId());
+        $this->view->assign('rootPid', $this->request->getAttribute('site')->getRootPageId());
         $this->view->assign('GooglemapsSettings', $settings);
         return $this->htmlResponse();
+    }
+
+    /**
+     * Action initialize
+     */
+    protected function initializeAction(): void
+    {
+        $this->contentObject = $this->request->getAttribute('currentContentObject');
+        // intialize the content object
     }
 }

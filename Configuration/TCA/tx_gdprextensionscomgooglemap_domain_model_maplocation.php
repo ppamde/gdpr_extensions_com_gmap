@@ -16,6 +16,9 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'searchFields' => 'title,address',
         'iconfile' => 'EXT:gdpr_extensions_com_gmap/Resources/Public/Icons/tx_gdprextensionscomgooglemap_domain_model_maplocation.gif'
     ],

@@ -16,6 +16,9 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'searchFields' => 'heading,content,button_text,background_image_color,button_color,text_color,button_shape',
         'iconfile' => 'EXT:gdpr_extensions_com_gmap/Resources/Public/Icons/tx_gdprextensionscomgmap_domain_model_gdprmanager.gif'
     ],

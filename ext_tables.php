@@ -44,12 +44,4 @@ defined('TYPO3') || die();
             ]
         );
     }
-
-
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_gdprextensionscomgmap_domain_model_gdprgooglemaps', 'EXT:gdpr_extensions_com_gmap/Resources/Private/Language/locallang_csh_tx_gdprextensionscomgmap_domain_model_gdprgooglemaps.xlf');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_gdprextensionscomgmap_domain_model_gdprgooglemaps');
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_gdprextensionscomyoutube_domain_model_gdprmanager', 'EXT:gdpr_extensions_com_gmap/Resources/Private/Language/locallang_csh_tx_gdprextensionscomyoutube_domain_model_gdprmanager.xlf');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_gdprextensionscomyoutube_domain_model_gdprmanager');
 })();
